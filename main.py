@@ -4,6 +4,7 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.core.audio import SoundLoader
 from kivy.uix.gridlayout import GridLayout
 from kivy.properties import ObjectProperty
+from kivy.core.window import Window
 from kivy.factory import Factory
 import math
 from time import sleep
@@ -16,6 +17,7 @@ from kivy.uix.textinput import TextInput
 import os
 from pytube import Playlist, YouTube
 
+Window.size = (432, 888)
 performance_schema = []
 to_configure = []
 configured = []
@@ -440,12 +442,12 @@ class sign_to_list(Popup):
         for i in users_list:
             who_button = Button(text=f'{i}', size_hint_y=None, height=80)
             who_button.bind(on_release=lambda who_btn: self.dropdown_who.select(who_btn.text))
+            who_button.bind(on_release=lambda who_btn: self.display_music(who_btn.text))
             self.dropdown_who.add_widget(who_button)
 
         self.main_who_button = Button(text='Kto wychodzi?', size_hint=(0.8, None))
         self.main_who_button.bind(on_release=self.dropdown_who.open)
         self.dropdown_who.bind(on_select=lambda instance, x: setattr(self.main_who_button, 'text', x))
-        #self.dropdown_who.bind(on_select=lambda instance, x: self.display_music(x))
         #Who list End
 
 
