@@ -1,0 +1,178 @@
+WindowManager:
+    MainWindow:
+
+<MainWindow>:
+    name: "main"
+    stopplay_icon:stopplay_icon
+    scheldule_screen:scheldule_screen
+    menu_button:menu_button
+    display_time:display_time
+    GridLayout:
+        rows:3
+        GridLayout:
+            id: upper_line
+            cols: 3
+            size_hint: (1,0.1)
+
+
+            Label:
+                id: display_time
+                text_size: self.size
+                font_size: '20sp'
+                halign: 'center'
+                valign: 'center'
+                size_hint: (0.25,1)
+                background_color: (51/255, 51/255, 51/255,1)
+                canvas.before:
+                    Color:
+                        rgba: self.background_color
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+            Label:
+                size_hint: (0.5,1)
+                background_color: (51/255, 51/255, 51/255,1)
+                canvas.before:
+                    Color:
+                        rgba: self.background_color
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+            Button:
+                id: menu_button
+                size_hint: (0.25,1)
+                size_hint_max_x: self.height
+                on_release: root.menu_drop()
+                background_normal: ''
+                background_down: ''
+                background_color: (51/255, 51/255, 51/255,1)
+                Image:
+                    source: "gear.png"
+                    size: (self.parent.width-20,self.parent.height-20)
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
+
+        ScrollView:
+            do_scroll_x: False
+            do_scroll_y: True
+            GridLayout
+                id: scheldule_screen
+                cols: 1
+                size_hint_y: 3
+                spacing: 10
+                padding: 10
+
+        GridLayout:
+            cols:3
+            size_hint: (1,0.1)
+            Button:
+                color: 1,0,0,1
+                on_press: root.stop_start()
+                size_hint_max_x: self.height+30
+                background_normal: ''
+                background_down: ''
+                background_color: (25/255, 25/255, 25/255,1)
+                Image:
+                    id: stopplay_icon
+                    source: "play.png"
+                    size: (self.parent.width-10,self.parent.height-10)
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
+            Button:
+                color: 1,0,0,1
+                on_press: root.open_popup_to_sign_in()
+                background_normal: ''
+                background_down: ''
+                background_color: (40/255, 40/255, 40/255,1)
+                Image:
+                    source: "plus_icon.png"
+                    size: (self.parent.width-10,self.parent.height-10)
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
+            Button:
+                color: 1,0,0,1
+                size_hint_max_x: self.height+30
+                background_normal: ''
+                background_down: ''
+                background_color: (25/255, 25/255, 25/255,1)
+                on_press: root.open_next_music_pop()
+                Image:
+                    source: "next_icon.png"
+                    size: (self.parent.width-10,self.parent.height-10)
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
+
+<Menu_Dropdown>:
+    auto_width: False
+    dropdown_width: 200
+    size_hint_x: 0.5
+    Button:
+        text: 'Stwórz schemat występu'
+        size_hint_y: None
+        background_normal: ''
+        background_down: ''
+        background_color: (25/255, 25/255, 25/255,1)
+        on_release: root.main_screen.open_create_schema()
+        on_release: root.dismiss()
+        height: 100
+        width: 300
+    Button:
+        text: 'Dodaj Artyste'
+        background_normal: ''
+        background_down: ''
+        background_color: (35/255, 35/255, 35/255,1)
+        size_hint_y: None
+        height: 100
+        width: 300
+        on_release: root.main_screen.add_user()
+        on_release: root.dismiss()
+    Button:
+        text: 'Dodaj Utwór'
+        background_normal: ''
+        background_down: ''
+        background_color: (25/255, 25/255, 25/255,1)
+        size_hint_y: None
+        height: 100
+        width: 300
+        on_release: root.main_screen.add_music()
+        on_release: root.dismiss()
+    Button:
+        text: 'Rozpocznij występ'
+        background_normal: ''
+        background_down: ''
+        background_color: (35/255, 35/255, 35/255,1)
+        size_hint_y: None
+        height: 100
+        width: 300
+        on_release: root.main_screen.performance_start()
+        on_release: root.dismiss()
+
+
+<RoundedLabel>:
+    background_color: (51/255, 51/255, 51/255,1)
+    canvas.before:
+        Color:
+            rgba: self.background_color
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [30]
+    Label:
+        id: roundedlabel_row1
+        size_hint: (1,0.3)
+        text_size: (self.parent.width-35,self.parent.height/3)
+        font_size: self.width/10
+        text: '[b]Kij[/b]'
+        markup: True
+    Label:
+        id: roundedlabel_row2
+        size_hint: (1,0.3)
+        font_size: self.width/20
+        text_size: (self.parent.width-35,None)
+        text: 'Brak Wykonawcy'
+    Label:
+        id: roundedlabel_row3
+        size_hint: (1,0.3)
+        text_size: (self.parent.width-35,self.parent.height/2-10)
+        font_size: self.width/22
+        text: 'Brak Utworu'
