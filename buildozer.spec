@@ -1,17 +1,18 @@
 [app]
 
-title = Test App
-package.name = testapp
+title = Lake of Fire
+package.name = lakeoffire
 package.domain = org.test
 
 source.dir = .
 source.include_exts = py,png,jpg,kv,atlas
-
+source.include_patterns = Static/*,
 version = 0.1
-requirements = python3,kivy
+requirements = python3,kivy,math,pytube,os,array,time,threading
 
 orientation = portrait
 fullscreen = 0
+android.permissions = INTERNET
 android.arch = armeabi-v7a
 
 # iOS specific
