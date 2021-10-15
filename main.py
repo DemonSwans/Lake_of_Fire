@@ -429,7 +429,7 @@ class sign_to_list(Popup):
         self.dropdown_tool = DropDown()
         for i in performance_schema:
             tool_button = Button(text=f'{i}', size_hint_y=None, height=80)
-            tool_button.bind(on_release=lambda tool_button: self.dropdown_tool.select(tool_button.text))
+            tool_button.bind(on_release=lambda tool_btn: self.dropdown_tool.select(tool_btn.text))
             self.dropdown_tool.add_widget(tool_button)
 
         self.main_tool_button = Button(text='Na co wychodzi?', size_hint=(0.8, None))
@@ -441,7 +441,7 @@ class sign_to_list(Popup):
         self.dropdown_who = DropDown()
         for i in users_list:
             who_button = Button(text=f'{i}', size_hint_y=None, height=80)
-            who_button.bind(on_release=lambda who_button: self.dropdown_who.select(who_button.text))
+            who_button.bind(on_release=lambda who_btn: self.dropdown_who.select(who_btn.text))
             self.dropdown_who.add_widget(who_button)
 
         self.main_who_button = Button(text='Kto wychodzi?', size_hint=(0.8, None))
