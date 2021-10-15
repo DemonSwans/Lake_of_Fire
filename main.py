@@ -442,7 +442,7 @@ class sign_to_list(Popup):
         for i in users_list:
             who_button = Button(text=f'{i}', size_hint_y=None, height=80)
             who_button.bind(on_release=lambda who_btn: self.dropdown_who.select(who_btn.text))
-            who_button.bind(on_release=lambda who_btn: self.display_music(who_btn.text))
+            who_button.bind(on_release=lambda who_btn_2: self.display_music(who_btn_2.text))
             self.dropdown_who.add_widget(who_button)
 
         self.main_who_button = Button(text='Kto wychodzi?', size_hint=(0.8, None))
@@ -492,6 +492,7 @@ class sign_to_list(Popup):
 
     def display_music(self, whos):
         global music_tf
+        print('display')
         if hasattr(self,'dropdown_music'):
             self.remove_widget(self.ids['music_dropdown'])
             self.contentup.remove_widget(self.contentup.children[0])
