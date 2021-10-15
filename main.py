@@ -445,7 +445,7 @@ class sign_to_list(Popup):
         self.main_who_button = Button(text='Kto wychodzi?', size_hint=(0.8, None))
         self.main_who_button.bind(on_release=self.dropdown_who.open)
         self.dropdown_who.bind(on_select=lambda instance, x: setattr(self.main_who_button, 'text', x))
-        self.dropdown_who.bind(on_select=lambda instance, x: self.display_music(x))
+        #self.dropdown_who.bind(on_select=lambda instance, x: self.display_music(x))
         #Who list End
 
 
