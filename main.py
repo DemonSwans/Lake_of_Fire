@@ -4,7 +4,6 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.core.audio import SoundLoader
 from kivy.uix.gridlayout import GridLayout
 from kivy.properties import ObjectProperty
-from kivy.core.window import Window
 from kivy.factory import Factory
 import math
 from time import sleep
@@ -17,7 +16,6 @@ from kivy.uix.textinput import TextInput
 import os
 from pytube import Playlist, YouTube
 
-Window.size = (432, 888)
 performance_schema = []
 to_configure = []
 configured = []
