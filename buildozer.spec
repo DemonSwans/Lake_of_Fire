@@ -8,7 +8,7 @@ source.dir = .
 source.include_exts = py,png,jpg,kv,atlas
 source.include_patterns = Static/*,
 version = 0.1
-requirements = python3,kivy,math,pytube,os,array,time,threading
+requirements = python3,kivy,math,pytube,os,time,threading
 
 orientation = portrait
 fullscreen = 0
