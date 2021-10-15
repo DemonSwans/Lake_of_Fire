@@ -12,7 +12,6 @@ from threading import Thread
 from kivy.uix.popup import Popup
 from kivy.uix.button import Button
 from kivy.uix.label import Label
-from array import *
 from kivy.uix.dropdown import DropDown
 from kivy.uix.textinput import TextInput
 import os
