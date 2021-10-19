@@ -16,10 +16,8 @@ from kivy.uix.dropdown import DropDown
 from kivy.uix.textinput import TextInput
 import os
 from pytube import Playlist, YouTube
-from jnius import autoclass
 
-Environment = autoclass('android.os.Environment')
-SD_CARD = Environment.getExternalStorageDirectory()
+SD_CARD = '\\storage\\emulated\\0'
 
 #Window.size = (432, 888)
 performance_schema = []
@@ -530,6 +528,7 @@ class Lake_of_Fire(App):
         if not os.path.isdir(f'{SD_CARD}\\Lake_of_fire\\Users'):
             os.mkdir(f'{SD_CARD}\\Lake_of_fire')
             os.mkdir(f'{SD_CARD}\\Lake_of_fire\\Users')
+
     def on_stop(self):
         global end
         end = False
