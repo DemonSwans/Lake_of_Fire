@@ -16,8 +16,9 @@ from kivy.uix.dropdown import DropDown
 from kivy.uix.textinput import TextInput
 import os
 from pytube import Playlist, YouTube
-from android.storage import primary_external_storage_path
-SD_CARD = primary_external_storage_path()
+from jnius import autoclass
+Environment = autoclass('android.os.Environment')
+SD_CARD = Environment.getExternalStorageDirectory()
 
 #Window.size = (432, 888)
 performance_schema = []
