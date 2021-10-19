@@ -16,6 +16,9 @@ from kivy.uix.dropdown import DropDown
 from kivy.uix.textinput import TextInput
 import os
 from pytube import Playlist, YouTube
+import certifi
+
+os.environ['SSL_CERT_FILE'] = certifi.where()
 
 SD_CARD = '/storage/emulated/0'
 
