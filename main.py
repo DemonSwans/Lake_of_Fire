@@ -1,3 +1,7 @@
+import os
+import certifi
+os.environ['SSL_CERT_FILE'] = certifi.where()
+os.environ['KIVY_AUDIO'] = 'sdl2'
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
@@ -14,11 +18,10 @@ from kivy.uix.button import Button
 from kivy.uix.label import Label
 from kivy.uix.dropdown import DropDown
 from kivy.uix.textinput import TextInput
-import os
 from pytube import Playlist, YouTube
-import certifi
 
-os.environ['SSL_CERT_FILE'] = certifi.where()
+
+
 
 SD_CARD = '/storage/emulated/0'
 
