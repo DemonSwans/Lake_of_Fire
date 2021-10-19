@@ -495,6 +495,8 @@ class sign_to_list(Popup):
 
     def display_music(self, whos):
         global music_tf
+        print("hej")
+        '''
         user_music = [d for d in os.listdir(f'Users\\{whos}')]
         drop_down_child = self.dropdown_music.children[0]
         if user_music:
@@ -505,7 +507,7 @@ class sign_to_list(Popup):
             music_button.bind(on_release=lambda music_btn: self.dropdown_music.select(music_btn.text))
             self.dropdown_music.add_widget(music_button)
         # Tool list End
-
+'''
 
 class RoundedLabel(GridLayout):
     pass
