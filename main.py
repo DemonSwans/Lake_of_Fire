@@ -16,6 +16,8 @@ from kivy.uix.dropdown import DropDown
 from kivy.uix.textinput import TextInput
 import os
 from pytube import Playlist, YouTube
+from android.storage import primary_external_storage_path
+SD_CARD = primary_external_storage_path()
 
 #Window.size = (432, 888)
 performance_schema = []
@@ -127,7 +129,7 @@ class MainWindow(Screen):
         global when_stopped,sound,end,index_in_schema,performance_schema,to_configure,id_number,next_music
         if hasattr(self.scheldule_screen.ids, '0'):
                 if self.scheldule_screen.ids['0'].ids.roundedlabel_row3.text != 'Brak Utworu' and self.scheldule_screen.ids['0'].ids.roundedlabel_row2.text != 'Brak Wykonawcy':
-                    sound = SoundLoader.load(f'Users/{self.scheldule_screen.ids["0"].ids.roundedlabel_row2.text}/{self.scheldule_screen.ids["0"].ids.roundedlabel_row3.text}')
+                    sound = SoundLoader.load(f'{SD_CARD}\\Lake_of_fire\\Users\\{self.scheldule_screen.ids["0"].ids.roundedlabel_row2.text}\\{self.scheldule_screen.ids["0"].ids.roundedlabel_row3.text}')
                     sound.volume = 0
                     sound.play()
                     for _ in range(300):
@@ -158,7 +160,7 @@ class MainWindow(Screen):
                                     if end == False:
                                         break
                                     sleep(0.1)
-                            sound = SoundLoader.load(f'Users/{self.scheldule_screen.ids[f"{next_music}"].ids.roundedlabel_row2.text}/{self.scheldule_screen.ids[f"{next_music}"].ids.roundedlabel_row3.text}')
+                            sound = SoundLoader.load(f'{SD_CARD}\\Lake_of_fire\\Users\\{self.scheldule_screen.ids[f"{next_music}"].ids.roundedlabel_row2.text}\\{self.scheldule_screen.ids[f"{next_music}"].ids.roundedlabel_row3.text}')
                             sound.play()
                             sound.volume = 0
                             for _ in range(300):
@@ -290,7 +292,7 @@ class next_music_popup(Popup):
             id_number += 1
             next_music += 1
             sound = SoundLoader.load(
-                f'Users/{self.main_screen.scheldule_screen.ids[f"{next_music}"].ids.roundedlabel_row2.text}/{self.main_screen.scheldule_screen.ids[f"{next_music}"].ids.roundedlabel_row3.text}')
+                f'{SD_CARD}\\Lake_of_fire\\Users\\{self.main_screen.scheldule_screen.ids[f"{next_music}"].ids.roundedlabel_row2.text}\\{self.main_screen.scheldule_screen.ids[f"{next_music}"].ids.roundedlabel_row3.text}')
             sound.play()
             sound.volume = 0
             for _ in range(300):
@@ -302,7 +304,7 @@ class next_music_popup(Popup):
 class add_music_popup(Popup):
     def __init__(self, main_screen, **kwargs):
         super(add_music_popup, self).__init__(**kwargs)
-        users_list = [d for d in os.listdir('Users')]
+        users_list = [d for d in os.listdir(f'{SD_CARD}\\Lake_of_fire\\Users')]
         self.main_screen = main_screen
         self.content = GridLayout(rows=2)
         self.title = 'Dodawnie Utworu'
@@ -346,7 +348,7 @@ class add_music_popup(Popup):
 
     def add_song(self):
         yt = YouTube(f'{self.input_song.text}')
-        yt.streams.filter(only_audio=True).first().download(f'Users/{self.main_who_button.text}')
+        yt.streams.filter(only_audio=True).first().download(f'{SD_CARD}\\Lake_of_fire\\Users\\{self.main_who_button.text}')
     def save(self, *args):
         if self.main_who_button.text != 'Kogo utwór?':
             if self.input_song.text[:6] == 'https:':
@@ -396,7 +398,7 @@ class add_user_popup(Popup):
 
     def save(self, *args):
         if self.input_who.text != '':
-            os.mkdir(f'Users/{self.input_who.text}')
+            os.mkdir(f'{SD_CARD}\\Lake_of_fire\\Users\\{self.input_who.text}')
             if self.input_playlist.text[:6] == 'https:':
                 self.dm = Thread(target=self.download_music)
                 self.dm.start()
@@ -409,7 +411,7 @@ class add_user_popup(Popup):
     def download_music(self):
         p = Playlist(f'{self.input_playlist.text}')
         for video in p.videos:
-            video.streams.filter(only_audio=True).first().download(f'Users/{self.input_who.text}')
+            video.streams.filter(only_audio=True).first().download(f'{SD_CARD}\\Lake_of_fire\\Users\\{self.input_who.text}')
 class Menu_Dropdown(DropDown):
     def __init__(self,main_screen,**kwargs):
         super(Menu_Dropdown,self).__init__(**kwargs)
@@ -417,7 +419,7 @@ class Menu_Dropdown(DropDown):
 class sign_to_list(Popup):
     def __init__(self,my_widget,**kwargs):
         super(sign_to_list,self).__init__(**kwargs)
-        users_list = [d for d in os.listdir('Users')]
+        users_list = [d for d in os.listdir(f'{SD_CARD}\\Lake_of_fire\\Users')]
         self.my_widget = my_widget
         self.content = GridLayout(rows = 2)
         self.title = 'Dopisz sie'
@@ -495,8 +497,8 @@ class sign_to_list(Popup):
 
     def display_music(self, whos):
         global music_tf
-        user_music = [d for d in os.listdir(f'Users\\{whos}')]
-        '''
+        user_music = [d for d in os.listdir(f'{SD_CARD}\\Lake_of_fire\\Users\\{whos}')]
+
         drop_down_child = self.dropdown_music.children[0]
         if user_music:
             drop_down_child.clear_widgets()
@@ -506,7 +508,7 @@ class sign_to_list(Popup):
             music_button.bind(on_release=lambda music_btn: self.dropdown_music.select(music_btn.text))
             self.dropdown_music.add_widget(music_button)
         # Tool list End
-'''
+
 
 class RoundedLabel(GridLayout):
     pass
@@ -523,8 +525,8 @@ class Lake_of_Fire(App):
         return kv
 
     def on_start(self):
-        if not os.path.isdir('Users'):
-            os.mkdir('Users')
+        if not os.path.isdir(f'{SD_CARD}\\Lake_of_fire\\Users'):
+            os.mkdir(f'{SD_CARD}\\Lake_of_fire\\Users')
 
     def on_stop(self):
         global end
