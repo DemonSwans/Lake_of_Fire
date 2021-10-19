@@ -495,9 +495,8 @@ class sign_to_list(Popup):
 
     def display_music(self, whos):
         global music_tf
-        print("hej")
-        '''
         user_music = [d for d in os.listdir(f'Users\\{whos}')]
+        '''
         drop_down_child = self.dropdown_music.children[0]
         if user_music:
             drop_down_child.clear_widgets()
