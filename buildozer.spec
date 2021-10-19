@@ -8,7 +8,7 @@ source.dir = .
 source.include_exts = py,png,jpg,kv,atlas
 source.include_patterns = Static/*,
 version = 0.1
-requirements = python3,kivy,pytube
+requirements = python3,kivy,pytube,android
 
 orientation = portrait
 fullscreen = 0
