@@ -528,8 +528,8 @@ class Lake_of_Fire(App):
 
     def on_start(self):
         if not os.path.isdir(f'{SD_CARD}\\Lake_of_fire\\Users'):
+            os.mkdir(f'{SD_CARD}\\Lake_of_fire')
             os.mkdir(f'{SD_CARD}\\Lake_of_fire\\Users')
-
     def on_stop(self):
         global end
         end = False
