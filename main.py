@@ -4,6 +4,7 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.core.audio import SoundLoader
 from kivy.uix.gridlayout import GridLayout
 from kivy.properties import ObjectProperty
+#from kivy.core.window import Window
 from kivy.factory import Factory
 import math
 from time import sleep
@@ -16,6 +17,7 @@ from kivy.uix.textinput import TextInput
 import os
 from pytube import Playlist, YouTube
 
+#Window.size = (432, 888)
 performance_schema = []
 to_configure = []
 configured = []
@@ -448,12 +450,15 @@ class sign_to_list(Popup):
         self.dropdown_who.bind(on_select=lambda instance, x: setattr(self.main_who_button, 'text', x))
         #Who list End
 
-
+        self.dropdown_music = DropDown()
+        self.main_music_button = Button(text='Do czego wychodzi?', size_hint=(0.8, None))
+        self.main_music_button.bind(on_release=self.dropdown_music.open)
+        self.dropdown_music.bind(on_select=lambda instance, x: setattr(self.main_music_button, 'text', x))
 
 
         self.contentup.add_widget(self.main_tool_button)
         self.contentup.add_widget(self.main_who_button)
-
+        self.contentup.add_widget(self.main_music_button)
 
 
         #Guziki
@@ -490,33 +495,21 @@ class sign_to_list(Popup):
 
     def display_music(self, whos):
         global music_tf
-        print('display')
-        if hasattr(self,'dropdown_music'):
-            self.remove_widget(self.ids['music_dropdown'])
-            self.contentup.remove_widget(self.contentup.children[0])
-        self.dropdown_music = DropDown()
-        self.ids['music_dropdown'] = self.dropdown_music
-        self.main_music_button = Button(text='Do czego wychodzi?', size_hint=(0.8, None))
-        self.main_music_button.text = 'Do czego wychodzi?'
         user_music = [d for d in os.listdir(f'Users\\{whos}')]
         drop_down_child = self.dropdown_music.children[0]
         if user_music:
             drop_down_child.clear_widgets()
-
         # Tool List Start
-
         for i in user_music:
             music_button = Button(text=f'{i}', size_hint_y=None, height=80)
-            music_button.bind(on_release=lambda music_button: self.dropdown_music.select(music_button.text))
+            music_button.bind(on_release=lambda music_btn: self.dropdown_music.select(music_btn.text))
             self.dropdown_music.add_widget(music_button)
-
-
-        self.main_music_button.bind(on_release=self.dropdown_music.open)
-        self.dropdown_music.bind(on_select=lambda instance, x: setattr(self.main_music_button, 'text', x))
         # Tool list End
-        self.contentup.add_widget(self.main_music_button)
+
+
 class RoundedLabel(GridLayout):
     pass
+
 class WindowManager(ScreenManager):
     pass
 
@@ -527,9 +520,11 @@ kv = Builder.load_file("my.kv")
 class Lake_of_Fire(App):
     def build(self):
         return kv
+
     def on_start(self):
         if not os.path.isdir('Users'):
             os.mkdir('Users')
+
     def on_stop(self):
         global end
         end = False
