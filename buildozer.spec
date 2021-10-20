@@ -12,7 +12,7 @@ requirements = python3,kivy,pytube,android,certifi
 
 orientation = portrait
 fullscreen = 0
-android.permissions = INTERNET,WRITE_EXTERNAL_STORAGE,READ_EXTERNAL_STORAGE
+android.permissions = INTERNET,WRITE_EXTERNAL_STORAGE,READ_EXTERNAL_STORAGE,FOREGROUND_SERVICE,MANAGE_EXTERNAL_STORAGE
 android.arch = armeabi-v7a
 
 # iOS specific
