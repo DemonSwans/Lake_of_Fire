@@ -1,7 +1,6 @@
 import os
 import certifi
 os.environ['SSL_CERT_FILE'] = certifi.where()
-os.environ['KIVY_AUDIO'] = 'sdl2'
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
